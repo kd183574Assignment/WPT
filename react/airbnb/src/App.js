@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Login from './screens/Login'
 import Register from './screens/Register'
+
+import Login from './screens/Login'
 import Home from './screens/Home'
 import UserDetails from './screens/UserDetails'
 import Users from './screens/Users'
@@ -20,8 +21,8 @@ function App() {
   return (
     <div className='cantainer'>
       <Routes>
-        <Route path='' element={<Login/>}></Route>
-        <Route path='register' element={<Register/>}></Route>
+      <Route path='' element={<Register/>}></Route>
+        <Route path='login' element={<Login/>}></Route>
         <Route path='home' element={<Home/>}></Route>
         <Route path='properties' element={<Properties/>}></Route>
         <Route path='property-details' element={<PropertyDetails/>}></Route>
