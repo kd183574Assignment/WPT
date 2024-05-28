@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { register } from "../services/admin"
 
 
 function Register()
@@ -31,13 +32,18 @@ function Register()
             {
                 toast.error("Please enter password")
             }
-        else if(password != confirmPassword)
+        
+        else if(confirmPassword == 0)
+            {
+                toast.error("Please confirm your password")
+            }
+        else if(password !== confirmPassword)
             {
                 toast.error1("Password does not match")
             }
         else
         {
-            const result = await Register(firstName, lastName, email, password)
+            const result = await register(firstName, lastName, email, password)
             if(result['status'] == 'success'){
                 toast.success("Successfully registered a new user")
                 navigate('/login')
