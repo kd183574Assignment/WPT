@@ -1,109 +1,101 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import NavBar from "../components/navbar";
+import { Link, useNavigate } from 'react-router-dom'
+import Navbar from '../components/navbar'
+import { useState } from 'react'
+import Amenity from '../components/amenity'
+import { toast } from 'react-toastify'
+import { addProperty } from '../services/property'
 
+function AddProperty() {
+  const [title, setTitle] = useState('')
+  const [contactName, setContactName] = useState('')
+  const [contactNumber, setContactNumber] = useState('')
+  const [details, setDetails] = useState('')
+  const [address, setAddress] = useState('')
+  const [guests, setGuests] = useState('')
+  const [bedrooms, setBedrooms] = useState('')
+  const [beds, setBeds] = useState('')
 
+  const [isLakeView, setLakeView] = useState(false)
+  const [isTV, setTV] = useState(false)
+  const [isAC, setAC] = useState(false)
+  const [isWiFi, setWifi] = useState(false)
+  const [isMinibar, setMinibar] = useState(false)
+  const [isBreakfast, setBreakfast] = useState(false)
+  const [isParking, setParking] = useState(false)
 
+  const [bathrooms, setBathrooms] = useState('')
+  const [rent, setRent] = useState('')
 
-function AddProperty()
-{
-    const [title, setTitle] = useState('')
-    const [contactName , setContactName] = useState('')
-    const [contactNumber, setContactNumber] = useState('')
-    const [details, setDetails] = useState('')
-    const [address, setAddress] = useState('')
-    const [guests, setGuests] = useState('')
-    const [bedrooms, setBedrooms] = useState('')
-    const [beds , setBeds] = useState('')
+  const [image, setImage] = useState(undefined)
 
+  const navigate = useNavigate()
 
-    const [isLakeView, setLakeView] = useState('')
-    const [isTV, setTV] = useState(false)
-    const [isAC, setAC] = useState(false)
-    const [isWiFi, setWifi] = useState(false)
-    const [isMinibar, setMinibar] = useState(false)
-    const [isBreakfast, setBreakfast] = useState(false)
-    const [isParking, setParking] = useState(false)
-
-    const [bathrooms, setBathrooms] = useState('')
-    const [rent, setRent] = useState('')
-
-    const [image, setImage] = useState(undefined)
-
-    const navigate = useNavigate()
-
-    const onSave = async () => {
-        if(title.length == 0)
-            {
-                toast.warn('Please enter title')
-            }
-        else if(contactName.length == 0)
-            {
-                toast.warn("Please enter contact number ")
-            }
-        else if(!image)
-            {
-                toast.warn("Please select a property photo")
-            }
-        else{
-            const result = await addProperty(
-                title,
-                contactNumber,
-                contactName,
-                details,
-                address,
-                guests,
-                bedrooms,
-                bathrooms,
-                beds,
-                rent,
-                isLakeView,
-                isTV,
-                isBreakfast,
-                isMinibar,
-                isParking,
-                image
-            )
-            if(result['status'] == 'success'){
-                toast.success("Successfully added a property")
-                navigate('/properties')
-            }
-            else{
-                toast.error(result['error'])
-                
-            }
-        }
+  const onSave = async () => {
+    if (title.length == 0) {
+      toast.warn('Please enter title')
+    } else if (contactName.length == 0) {
+      toast.warn('Please enter contact name')
+    } else if (contactNumber.length == 0) {
+      toast.warn('Please enter contact number')
+    } else if (!image) {
+      toast.warn('Please select a property photo')
+    } else {
+      const result = await addProperty(
+        title,
+        contactNumber,
+        contactName,
+        details,
+        address,
+        guests,
+        bedrooms,
+        bathrooms,
+        beds,
+        rent,
+        isLakeView,
+        isTV,
+        isAC,
+        isWiFi,
+        isMinibar,
+        isBreakfast,
+        isParking,
+        image
+      )
+      if (result['status'] == 'success') {
+        toast.success('Successfully added a property')
+        navigate('/properties')
+      } else {
+        toast.error(result['error'])
+      }
     }
+  }
 
-    return
-    (
-        <div>
-            <NavBar/>
-            <h2 className="page-header">Add Property</h2>
-            <div className="form">
-                <div className="row">
-                    <div className="col">
-                        <div className="mb-3">
-                            <label htmlFor="">Title</label>
-                            <input 
-                            onChange={(e) => setTitle(e.target.value)}
-                            type="text"
-                            className="form-control"            
-                            />
-                        </div>
-                    </div>
-                <div className="col">
-                    <div className="mb-3">
-                        <label htmlFor="">Contact Name</label>
-                        <input 
-                        onChange={(e) => setContactName(e.target.value)}
-                        type="text" 
-                        className="form-control"/>
-                    </div>
-                </div>
-                <div className='col'>
+  return (
+    <div>
+      <Navbar />
+      <h2 className='page-header'>Add Property</h2>
+      <div className='form'>
+        <div className='row'>
+          <div className='col'>
+            <div className='mb-3'>
+              <label htmlFor=''>Title</label>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type='text'
+                className='form-control'
+              />
+            </div>
+          </div>
+          <div className='col'>
+            <div className='mb-3'>
+              <label htmlFor=''>Contact Name</label>
+              <input
+                onChange={(e) => setContactName(e.target.value)}
+                type='text'
+                className='form-control'
+              />
+            </div>
+          </div>
+          <div className='col'>
             <div className='mb-3'>
               <label htmlFor=''>Contact Number</label>
               <input
