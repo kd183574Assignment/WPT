@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { addProperty } from '../services/property'
 
 function AddProperty() {
+ // debugger
   const [title, setTitle] = useState('')
   const [contactName, setContactName] = useState('')
   const [contactNumber, setContactNumber] = useState('')
@@ -31,6 +32,7 @@ function AddProperty() {
   const navigate = useNavigate()
 
   const onSave = async () => {
+   // debugger
     if (title.length == 0) {
       toast.warn('Please enter title')
     } else if (contactName.length == 0) {

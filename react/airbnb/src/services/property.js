@@ -6,9 +6,10 @@ export async function getProperties()
     try{
         const token = sessionStorage['token']
         const response = await axios.get(`${config.serverUrl}/property`,
-            {headers: {token},})
+            {headers: {token},})            
+            console.log("** ", response)
 
-        return response.date
+        return response.data
     }catch(ex)
     {
     console.log('exception', ex)
@@ -65,6 +66,8 @@ export async function addProperty(
         {
             headers: {token},
         })
+
+        // console.log("** ", response)
         return response.data  
 }
 catch(ex){
